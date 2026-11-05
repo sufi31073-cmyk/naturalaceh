@@ -165,7 +165,6 @@ export default function Navbar({ scrolled }) {
             <span>Banda Aceh · 05°33'N 95°19'E</span>
             <span className="text-stone-600">|</span>
             <SmartLink href="/books" className="hover:text-white transition-colors">ISBN &amp; Publikasi</SmartLink>
-            <SmartLink href="/intern" className="hover:text-white transition-colors">Magang / MSIB</SmartLink>
             <SmartLink href="/login" className="hover:text-white transition-colors">Detail Dokumen Online</SmartLink>
           </div>
         </div>
@@ -207,18 +206,10 @@ export default function Navbar({ scrolled }) {
             ))}
           </nav>
 
-          {/* Action CTA & Mobile Hamburger */}
-          <div className="flex items-center gap-2 sm:gap-3">
-            <SmartLink
-              href="/intern"
-              className="hidden sm:inline-flex btn-primary text-xs py-2 px-4 uppercase tracking-wider font-semibold"
-            >
-              Daftar / Magang
-            </SmartLink>
-
-            {/* Mobile Hamburger Toggle Button */}
+          {/* Mobile Hamburger Toggle Button (visible only on mobile) */}
+          <div className="lg:hidden flex items-center">
             <button
-              className="lg:hidden p-2 text-stone-800 hover:text-red-700 focus:outline-none rounded transition-colors"
+              className="p-2 text-stone-800 hover:text-red-700 focus:outline-none rounded transition-colors"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Buka menu navigasi"
               aria-expanded={mobileOpen}
@@ -318,15 +309,8 @@ export default function Navbar({ scrolled }) {
               );
             })}
 
-            <div className="p-5 bg-stone-100/60 flex flex-col gap-3">
-              <Link
-                to="/intern"
-                onClick={() => setMobileOpen(false)}
-                className="btn-primary w-full justify-center text-xs py-3 uppercase tracking-wider font-semibold"
-              >
-                Daftar Magang / Relawan
-              </Link>
-              <div className="text-center text-[11px] text-stone-500 font-mono">
+            <div className="p-4 bg-stone-100/60 text-center">
+              <div className="text-[11px] text-stone-500 font-mono">
                 Banda Aceh · naturalaceh.org
               </div>
             </div>
