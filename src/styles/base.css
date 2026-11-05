@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-paper text-charcoal font-body;
+    background-image: theme('backgroundImage.paper-grain');
+    background-size: cover;
+  }
+  h1, h2, h3 {
+    @apply font-heading;
+  }
+  code, .mono {
+    @apply font-mono;
+  }
+}
