@@ -38,7 +38,7 @@ export default function Hero({ heroRef }) {
           <div className="relative">
             <div className="img-hover border border-stone-200">
               <img
-                src="/hero-mangrove.png"
+                src={`${import.meta.env.BASE_URL}hero-mangrove.png`}
                 alt="Restorasi Mangrove Alue Naga"
                 className="w-full h-[480px] object-cover"
                 style={{ filter: 'sepia(10%) brightness(0.97)' }}

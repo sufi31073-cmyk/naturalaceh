@@ -10,7 +10,7 @@ export default function Footer() {
           {/* Brand + Social */}
           <div className="lg:col-span-1">
             <img
-              src="/logo.png"
+              src={`${import.meta.env.BASE_URL}logo.png`}
               alt="Natural Aceh"
               className="h-14 w-auto object-contain mb-5"
             />

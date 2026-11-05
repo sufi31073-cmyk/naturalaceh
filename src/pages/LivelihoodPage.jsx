@@ -51,7 +51,7 @@ export default function LivelihoodPage() {
           <div className="lg:col-span-7">
             <div className="border border-stone-200 overflow-hidden bg-white shadow-sm">
               <img
-                src="/hero-mangrove.png"
+                src={`${import.meta.env.BASE_URL}hero-mangrove.png`}
                 alt="Restorasi Mangrove Alue Naga"
                 className="w-full h-[450px] object-cover"
                 style={{ filter: 'sepia(8%)' }}

@@ -111,7 +111,7 @@ export const PILLARS = [
     num: '01',
     title: 'Restorasi Pesisir & Mangrove',
     desc: 'Pemulihan ekosistem mangrove dan wilayah pesisir Aceh melalui pendekatan berbasis komunitas dan riset lapangan.',
-    img: '/pillar-mangrove.png',
+    img: `${import.meta.env.BASE_URL}pillar-mangrove.png`,
   },
   {
     num: '02',

@@ -200,7 +200,7 @@ export default function Navbar({ scrolled }) {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 flex-shrink-0 group">
             <img
-              src="/logo.png"
+              src={`${import.meta.env.BASE_URL}logo.png`}
               alt="Natural Aceh"
               className="h-11 md:h-12 w-auto object-contain transition-transform group-hover:scale-105"
             />
