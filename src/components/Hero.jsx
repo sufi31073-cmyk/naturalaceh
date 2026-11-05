@@ -1,4 +1,5 @@
 import React from 'react';
+import heroMangroveImg from '../assets/hero-mangrove.png';
 
 export default function Hero({ heroRef }) {
   return (
@@ -38,7 +39,7 @@ export default function Hero({ heroRef }) {
           <div className="relative">
             <div className="img-hover border border-stone-200">
               <img
-                src={`${import.meta.env.BASE_URL}hero-mangrove.png`}
+                src={heroMangroveImg}
                 alt="Restorasi Mangrove Alue Naga"
                 className="w-full h-[480px] object-cover"
                 style={{ filter: 'sepia(10%) brightness(0.97)' }}

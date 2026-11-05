@@ -1,4 +1,5 @@
 import React from 'react';
+import logoImg from '../assets/logo.png';
 import { FOOTER_UNITS, SOCIAL_LINKS } from '../data/siteData';
 
 export default function Footer() {
@@ -10,7 +11,7 @@ export default function Footer() {
           {/* Brand + Social */}
           <div className="lg:col-span-1">
             <img
-              src={`${import.meta.env.BASE_URL}logo.png`}
+              src={logoImg}
               alt="Natural Aceh"
               className="h-14 w-auto object-contain mb-5"
             />

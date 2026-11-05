@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import heroMangroveImg from '../assets/hero-mangrove.png';
 
 export default function LivelihoodPage() {
   const steps = [
@@ -51,7 +52,7 @@ export default function LivelihoodPage() {
           <div className="lg:col-span-7">
             <div className="border border-stone-200 overflow-hidden bg-white shadow-sm">
               <img
-                src={`${import.meta.env.BASE_URL}hero-mangrove.png`}
+                src={heroMangroveImg}
                 alt="Restorasi Mangrove Alue Naga"
                 className="w-full h-[450px] object-cover"
                 style={{ filter: 'sepia(8%)' }}

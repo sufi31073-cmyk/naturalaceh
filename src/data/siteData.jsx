@@ -1,4 +1,5 @@
 import React from 'react';
+import pillarMangroveImg from '../assets/pillar-mangrove.png';
 
 export const NAV_ITEMS = [
   {
@@ -111,7 +112,7 @@ export const PILLARS = [
     num: '01',
     title: 'Restorasi Pesisir & Mangrove',
     desc: 'Pemulihan ekosistem mangrove dan wilayah pesisir Aceh melalui pendekatan berbasis komunitas dan riset lapangan.',
-    img: `${import.meta.env.BASE_URL}pillar-mangrove.png`,
+    img: pillarMangroveImg,
   },
   {
     num: '02',

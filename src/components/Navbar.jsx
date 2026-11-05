@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import AudioPlayer from './AudioPlayer';
+import logoImg from '../assets/logo.png';
 import { NAV_ITEMS, NEWS_TICKER } from '../data/siteData';
 
 /* Universal link handler: uses React Router Link for internal routes */
@@ -22,7 +22,7 @@ function SmartLink({ href, className, children, onClick }) {
 /* News Ticker – animated scrolling headlines */
 function NewsTicker({ items }) {
   const [idx, setIdx] = useState(0);
-  useEffect(() => {
+  React.useEffect(() => {
     const timer = setInterval(() => setIdx((p) => (p + 1) % items.length), 4500);
     return () => clearInterval(timer);
   }, [items.length]);
@@ -37,8 +37,9 @@ function NewsTicker({ items }) {
           <SmartLink
             key={i}
             href="/#dispatches"
-            className={`absolute inset-0 flex items-center text-xs truncate transition-all duration-500 hover:text-white ${i === idx ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
-              }`}
+            className={`absolute inset-0 flex items-center text-xs truncate transition-all duration-500 hover:text-white ${
+              i === idx ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
+            }`}
           >
             {text}
           </SmartLink>
@@ -84,12 +85,13 @@ function DropdownMenu({ item, open, onToggle }) {
 
       {open && (
         <div
-          className={`absolute top-full left-0 mt-0.5 bg-stone-900 border border-stone-800 shadow-2xl z-50 text-stone-200 ${isSDGs
-            ? 'w-[480px] grid grid-cols-2 p-2'
-            : isBooks
+          className={`absolute top-full left-0 mt-0.5 bg-stone-900 border border-stone-800 shadow-2xl z-50 text-stone-200 ${
+            isSDGs
+              ? 'w-[480px] grid grid-cols-2 p-2'
+              : isBooks
               ? 'w-64 grid grid-cols-3 gap-1 p-2.5 text-center'
               : 'w-64 py-1.5'
-            }`}
+          }`}
         >
           {isBooks ? (
             item.children.map((child) => (
@@ -151,29 +153,6 @@ export default function Navbar({ scrolled }) {
   const [openMenu, setOpenMenu] = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileExpanded, setMobileExpanded] = useState(null);
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
-
-  // Live filter search matches across programs and submenus
-  const filteredNavItems = searchQuery.trim() === '' ? [] : NAV_ITEMS.flatMap((item) => {
-    const matched = [];
-    if (item.label.toLowerCase().includes(searchQuery.toLowerCase())) {
-      matched.push({ label: item.label, href: item.href || '#', parent: 'Menu Utama' });
-    }
-    item.children.forEach((c) => {
-      if (c.label.toLowerCase().includes(searchQuery.toLowerCase())) {
-        matched.push({ label: c.label, href: c.href || '#', parent: item.label });
-      }
-      if (c.children) {
-        c.children.forEach((sub) => {
-          if (sub.label.toLowerCase().includes(searchQuery.toLowerCase())) {
-            matched.push({ label: sub.label, href: sub.href || '#', parent: `${item.label} > ${c.label}` });
-          }
-        });
-      }
-    });
-    return matched;
-  });
 
   return (
     <>
@@ -194,24 +173,25 @@ export default function Navbar({ scrolled }) {
 
       {/* ── Main Sticky Header ─────────────────────────────── */}
       <header
-        className={`sticky top-0 z-40 bg-white transition-all duration-300 ${scrolled ? 'shadow-md border-b border-stone-200' : 'border-b border-stone-200'
-          }`}
+        className={`sticky top-0 z-40 bg-white transition-all duration-300 ${
+          scrolled ? 'shadow-md border-b border-stone-200' : 'border-b border-stone-200'
+        }`}
       >
-        <div className="max-w-7xl mx-auto px-4 md:px-8 py-3.5 flex items-center justify-between gap-6">
-          {/* Logo */}
+        <div className="max-w-7xl mx-auto px-4 md:px-8 py-3.5 flex items-center justify-between gap-4 sm:gap-6">
+          {/* Logo Brand */}
           <Link to="/" className="flex items-center gap-3 flex-shrink-0 group">
             <img
-              src={`${import.meta.env.BASE_URL}logo.png`}
-              alt="Natural Aceh"
-              className="h-11 md:h-12 w-auto object-contain transition-transform group-hover:scale-105"
+              src={logoImg}
+              alt="Natural Aceh Logo"
+              className="h-10 sm:h-12 w-auto object-contain transition-transform group-hover:scale-105"
             />
-            <div className="hidden xl:block text-left border-l border-stone-200 pl-3">
-              <div className="text-[11px] font-bold text-stone-900 tracking-wider uppercase font-serif">
+            <div className="flex flex-col text-left">
+              <span className="font-serif font-bold text-base sm:text-lg text-stone-900 leading-tight group-hover:text-red-700 transition-colors">
                 Natural Aceh
-              </div>
-              <div className="text-[10px] text-stone-500 tracking-tight">
+              </span>
+              <span className="text-[10px] text-stone-500 tracking-tight hidden sm:inline">
                 Konservasi &amp; Pemberdayaan Berkelanjutan
-              </div>
+              </span>
             </div>
           </Link>
 
@@ -227,29 +207,8 @@ export default function Navbar({ scrolled }) {
             ))}
           </nav>
 
-          {/* Action Tools: Audio Player, Search, CTA, Mobile Hamburger */}
+          {/* Action CTA & Mobile Hamburger */}
           <div className="flex items-center gap-2 sm:gap-3">
-            {/* Audio Player */}
-            <AudioPlayer />
-
-            {/* Search Button */}
-            <button
-              onClick={() => setSearchOpen(!searchOpen)}
-              className={`p-2 rounded-full transition-colors ${
-                searchOpen
-                  ? 'bg-red-700 text-white'
-                  : 'text-stone-600 hover:text-stone-900 hover:bg-stone-100'
-              }`}
-              aria-label="Cari di situs"
-              title="Cari Program atau Publikasi"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <circle cx="11" cy="11" r="8" />
-                <path d="M21 21l-4.35-4.35" strokeLinecap="round" />
-              </svg>
-            </button>
-
-            {/* Desktop CTA Button */}
             <SmartLink
               href="/intern"
               className="hidden sm:inline-flex btn-primary text-xs py-2 px-4 uppercase tracking-wider font-semibold"
@@ -275,70 +234,11 @@ export default function Navbar({ scrolled }) {
               )}
             </button>
           </div>
-
         </div>
-
-        {/* ── Search Bar Dropdown ────────────────────────────── */}
-        {searchOpen && (
-          <div className="border-t border-stone-200 bg-stone-900 text-white px-4 md:px-8 py-4 shadow-inner">
-            <div className="max-w-3xl mx-auto">
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Ketik kata kunci (misal: Mangrove, WPS, SDGs, Beasiswa, ISBN, Anoa)..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  autoFocus
-                  className="w-full bg-stone-800 text-white placeholder-stone-400 text-sm px-4 py-2.5 rounded border border-stone-700 focus:outline-none focus:border-red-600"
-                />
-                {searchQuery && (
-                  <button
-                    onClick={() => setSearchQuery('')}
-                    className="absolute right-3 top-2.5 text-stone-400 hover:text-white text-xs font-mono"
-                  >
-                    HAPUS
-                  </button>
-                )}
-              </div>
-
-              {searchQuery.trim() !== '' && (
-                <div className="mt-3 max-h-60 overflow-y-auto divide-y divide-stone-800 bg-stone-950/80 rounded border border-stone-800">
-                  {filteredNavItems.length > 0 ? (
-                    filteredNavItems.map((res, idx) => (
-                      <SmartLink
-                        key={idx}
-                        href={res.href}
-                        onClick={() => setSearchOpen(false)}
-                        className="flex items-center justify-between p-2.5 hover:bg-stone-800 transition-colors text-xs"
-                      >
-                        <span className="font-medium text-stone-200">{res.label}</span>
-                        <span className="text-[10px] text-stone-400 font-mono">{res.parent}</span>
-                      </SmartLink>
-                    ))
-                  ) : (
-                    <div className="p-3 text-xs text-stone-400 text-center">
-                      Tidak ditemukan hasil untuk "{searchQuery}".
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-          </div>
-        )}
 
         {/* ── Mobile Menu Accordion ───────────────────────────── */}
         {mobileOpen && (
           <div className="lg:hidden border-t border-stone-200 bg-white max-h-[80vh] overflow-y-auto">
-            <div className="p-4 border-b border-stone-100 bg-stone-50">
-              <input
-                type="text"
-                placeholder="Cari program &amp; arsip..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-white text-stone-800 placeholder-stone-400 text-xs px-3 py-2 rounded border border-stone-300 focus:outline-none focus:border-stone-500"
-              />
-            </div>
-
             {NAV_ITEMS.map((item) => {
               const isExpanded = mobileExpanded === item.label;
               return (
@@ -353,7 +253,7 @@ export default function Navbar({ scrolled }) {
                     </SmartLink>
                     <button
                       onClick={() => setMobileExpanded(isExpanded ? null : item.label)}
-                      className="p-1 text-stone-400 hover:text-stone-700"
+                      className="p-1.5 text-stone-400 hover:text-stone-700"
                       aria-label="Toggle submenu"
                     >
                       <svg
