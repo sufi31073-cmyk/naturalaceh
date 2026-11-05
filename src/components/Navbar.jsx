@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import AudioPlayer from './AudioPlayer';
 import { NAV_ITEMS, NEWS_TICKER } from '../data/siteData';
 
 /* Universal link handler: uses React Router Link for internal routes */
@@ -227,6 +228,53 @@ export default function Navbar({ scrolled }) {
           </nav>
 
           {/* Action Tools: Audio Player, Search, CTA, Mobile Hamburger */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* Audio Player */}
+            <AudioPlayer />
+
+            {/* Search Button */}
+            <button
+              onClick={() => setSearchOpen(!searchOpen)}
+              className={`p-2 rounded-full transition-colors ${
+                searchOpen
+                  ? 'bg-red-700 text-white'
+                  : 'text-stone-600 hover:text-stone-900 hover:bg-stone-100'
+              }`}
+              aria-label="Cari di situs"
+              title="Cari Program atau Publikasi"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="11" cy="11" r="8" />
+                <path d="M21 21l-4.35-4.35" strokeLinecap="round" />
+              </svg>
+            </button>
+
+            {/* Desktop CTA Button */}
+            <SmartLink
+              href="/intern"
+              className="hidden sm:inline-flex btn-primary text-xs py-2 px-4 uppercase tracking-wider font-semibold"
+            >
+              Daftar / Magang
+            </SmartLink>
+
+            {/* Mobile Hamburger Toggle Button */}
+            <button
+              className="lg:hidden p-2 text-stone-800 hover:text-red-700 focus:outline-none rounded transition-colors"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label="Buka menu navigasi"
+              aria-expanded={mobileOpen}
+            >
+              {mobileOpen ? (
+                <svg width="24" height="24" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M4 4l14 14M18 4L4 18" strokeLinecap="round" />
+                </svg>
+              ) : (
+                <svg width="24" height="24" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M3 5h16M3 11h16M3 17h16" strokeLinecap="round" />
+                </svg>
+              )}
+            </button>
+          </div>
 
         </div>
 
